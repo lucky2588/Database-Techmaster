@@ -1,0 +1,48 @@
+1.	//Tạo Database    
+
+               ==>> CREATE DATABASE Quan_Ly_Kho 
+
+2.   // Tạo Bảng Product và id là khóa chính và tự động tăng
+
+ ==>> CREATE TABLE Quan_Ly_Kho.Product(
+id INT NOT NULL AUTO_INCREMENT,
+NameProduct VARCHAR(50),
+PrinceProduct FLOAT,
+CreateDay DATETIME,
+PRIMARY KEY(id)
+ );
+3. // Thêm 15 bảng ghi vào Table Product với lệnh Insect Into
+
+INSERT INTO product (NameProduct,PrinceProduct,CreateDay)
+VALUE
+('Toyota Vios',520.000,'2001-12-8 12:10'),('Toyota Cross',800.000,'2011-12-5 05:10'),
+('Hyundai Accent',510.000,'2008-11-3 11:10'),('Honda City',560.000,'2002-08-3 05:10')
+,('Vinfast Fadil',360.000,'2017-08-05'),
+('Mitsubishi Xpander',620.000,'2005-02-08 10:10'),
+('Mazda-CX5',900.000,'2011-12-8 12:10'),('KIA Seltos',700.000,'2012-12-8 05:45'),
+('KIA K3',650.000,'2014-12-8 12:10'),('Ford Ranger',1.100000,'2015-5-8 02:10'),
+('Honda CRV ',1100,'2016-9-8 6:10'),('Hyundai i10 ',360,'2019-9-8 2:10'),('Hyundai Santafe ',1100,'2020-10-10 2:45'),('Kia Carnival',1800,'2021-10-10 8:10'),('Hyundai Tucson',800,'2021-9-8 10:10');
+
+4. // Viết câu lệnh lấy ra các sản phẩm có giá tiền > 115 triệu
+
+SELECT*FROM quan_ly_kho.product WHERE princeproduct < 200;
+
+5. //Viết câu lệnh lấy ra các sản phẩm có chứa chữ 'k'
+
+SELECT * FROM product WHERE nameproduct LIKE '%K' OR nameproduct LIKE '%K%' OR nameproduct LIKE 'K%';
+
+6. \\Viết câu lệnh lấy ra các sản phẩm có tên là dòng xe 'kia' (Vì xe ô tô có kia morning, Toyota vios) hoặc giá tiền < 200 triệu
+
+=>>SELECT * FROM product WHERE nameproduct LIKE 'KIA%' AND princeproduct > 200
+
+7.// Viết câu lệnh lấy ra các sản phẩm dùng toán tử IN với giá trị giá cả là 100 triệu, 130 triệu, 140 triệu, 150 triệu, 160 triệu, 170 triệu
+
+=>>SELECT * FROM product WHERE  princeproduct IN(100,130,140,150,160,170);
+ 
+8.// Viết câu lệnh lấy ra tất cả giá tiền trong bảng, nếu có nhiều giá tiền trùng lặp thì chỉ lấy 1 giá trị thôi
+
+=>> SELECT DISTINCT (princeproduct) FROM product;
+
+
+
+
