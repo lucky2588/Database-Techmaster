@@ -1,0 +1,129 @@
+Leetcode 
+
+
+182. Duplicate Emails
+https://leetcode.com/problems/duplicate-emails
+
+select email from Person 
+Group by email
+Having Count(email) > 1;
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+183. Customers Who Never Order
+https://leetcode.com/problems/customers-who-never-order
+
+select A.name AS 'Customers' 
+from Customers A left join Orders B on A.id = B.customerID
+where B.id is null;
+-------------------------------------------------------------------------------------------------------------------------------------------
+196. Delete Duplicate Emails
+https://leetcode.com/problems/delete-duplicate-emails
+
+DELETE p1 FROM Person p1,
+    Person p2
+WHERE
+    p1.Email = p2.Email AND p1.Id > p2.Id
+-------------------------------------------------------------------------------------------------------------------------------------------
+197. Rising Temperature
+https://leetcode.com/problems/rising-temperature/
+
+select B.id from Weather A , Weather B where DATEDIFF(B.recordDate,A.recordDate) = 1 and B.temperature > A.temperature;
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+511. Game Play Analysis I
+Lần đầu đăng nhập trong game
+https://leetcode.com/problems/game-play-analysis-i
+
+SELECT
+  A.player_id,
+  MIN(A.event_date) AS first_login
+FROM
+  Activity A
+GROUP BY
+  A.player_id;
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+512. Game Play Analysis II
+https://leetcode.com/problems/game-play-analysis-ii
+
+SELECT player_id, device_id
+FROM Activity
+WHERE (player_id, event_date) IN (
+SELECT player_id, MIN(event_date)
+FROM Activity
+GROUP BY player_id
+)
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+577. Employee Bonus
+https://leetcode.com/problems/employee-bonus/
+
+SELECT 
+    A.name,
+    b.bonus
+FROM Employee AS A LEFT JOIN Bonus AS b
+ON e.empId = b.empId
+WHERE b.bonus < 1000 OR b.bonus IS NULL 
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+584. Find Customer Referee
+https://leetcode.com/problems/find-customer-referee
+
+select name  from Customer where referee_id = 0 or name = (select name from Customer 
+Group by referee_id 
+having Count(referee_id) < 2 
+);
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+586. Customer Placing the Largest Number of Orders
+https://leetcode.com/problems/customer-placing-the-largest-number-of-orders
+
+SELECT
+    customer_number
+FROM
+    orders
+GROUP BY customer_number
+ORDER BY COUNT(*) DESC
+LIMIT 1
+;
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+595. Big Countries
+https://leetcode.com/problems/big-countries
+
+select name  , population , area from World where area >= 3000000  or population >= 25000000;
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+596. Classes More Than 5 Students
+https://leetcode.com/problems/classes-more-than-5-students
+
+select DISTINCT (class) 
+from Courses
+where class = (select class  from Courses 
+Group by class
+having count(student) > 5
+);
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+597. Friend Requests I: Overall Acceptance Rate
+https://leetcode.com/problems/friend-requests-i-overall-acceptance-rate
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+607. Sales Person
+https://leetcode.com/problems/sales-person
+
+SELECT
+    s.name
+FROM
+    salesperson s
+WHERE
+    s.sales_id NOT IN (SELECT
+            o.sales_id
+        FROM
+            orders o
+                LEFT JOIN
+            company c ON o.com_id = c.com_id
+        WHERE
+            c.name = 'RED')
+;
