@@ -1,4 +1,5 @@
 Leetcode 
+Ten : Duc Thang
 
 
 182. Duplicate Emails
@@ -127,3 +128,84 @@ WHERE
         WHERE
             c.name = 'RED')
 ;
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+620. Not Boring Movies
+https://leetcode.com/problems/not-boring-movies
+
+select * from Cinema where id % 2 != 0 and description != 'boring'
+order by rating desc;
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+627. Swap Salary
+https://leetcode.com/problems/swap-salary/
+
+update Salary A , Salary B set A.sex = B.sex where A.sex != B.sex;
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+1050. Actors and Directors Who Cooperated At Least Three Times
+https://leetcode.com/problems/actors-and-directors-who-cooperated-at-least-three-times
+
+select actor_id , director_id  from ActorDirector
+group by actor_id,director_id
+having count(timestamp) = 3;
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+1148. Article Views I
+https://leetcode.com/problems/article-views-i
+
+select DISTINCT ( A.author_id) AS 'id' from Views A , Views B where A.author_id = B.viewer_id 
+order by A.author_id asc; 
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+1141. User Activity for the Past 30 Days I
+https://leetcode.com/problems/user-activity-for-the-past-30-days-i/
+SELECT activity_date AS day, COUNT(DISTINCT user_id) AS active_users
+FROM Activity
+WHERE activity_date > '2019-06-27' and activity_date < '2019-07-28'
+GROUP BY activity_date
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+181. Employees Earning More Than Their Managers
+https://leetcode.com/problems/employees-earning-more-than-their-managers
+
+SELECT
+     a.NAME AS Employee
+FROM Employee AS a JOIN Employee AS b
+     ON a.ManagerId = b.Id
+     AND a.Salary > b.Salary
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+1795. Rearrange Products Table
+https://leetcode.com/problems/rearrange-products-table/description/?envType=study-plan&id=sql-i
+
+SELECT product_id,"store1" as store,store1 as price
+FROM Products
+WHERE store1 IS NOT NULL
+UNION SELECT product_id,"store2",store2
+FROM Products
+WHERE store2 IS NOT NULL
+UNION SELECT product_id,"store3",store3
+FROM Products
+WHERE store3 IS NOT NULL;
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+1581. Customer Who Visited but Did Not Make Any Transactions
+https://leetcode.com/problems/customer-who-visited-but-did-not-make-any-transactions/description/?envType=study-plan&id=sql-i
+
+select customer_id, count(V.visit_id) as count_no_trans
+from Visits V Left join Transactions T on V.visit_id = T.visit_id
+where T.amount = 0 or T.amount is null
+group by 1
+order by 1;
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+1141. User Activity for the Past 30 Days I
+https://leetcode.com/problems/user-activity-for-the-past-30-days-i/solutions/?envType=study-plan&id=sql-i
+SELECT activity_date AS day, COUNT(DISTINCT user_id) AS active_users
+FROM Activity
+WHERE activity_date > '2019-06-27' and activity_date < '2019-07-28'
+GROUP BY activity_date
