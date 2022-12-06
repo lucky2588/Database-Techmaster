@@ -106,8 +106,12 @@ ADD id_customerss INT;
 ALTER TABLE orders
 ADD CONSTRAINT FK_Customersss FOREIGN KEY (id_customerss) REFERENCES customers(id);
 
-ALTER TABLE products
-ADD id_Orders INT;
-ALTER TABLE products
-ADD CONSTRAINT FK_Orders FOREIGN KEY (id_orders) REFERENCES Orders(id);
+
+CREATE TABLE Orders_product(
+id_Orderss INT,
+id_Productss BIGINT,
+ CONSTRAINT FK_Orderssss FOREIGN KEY(id_Orderss) REFERENCES orders(id),
+ CONSTRAINT FK_Productsss FOREIGN KEY(id_Productss) REFERENCES products(id)
+);
+
 
